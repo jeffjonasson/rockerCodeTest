@@ -36,8 +36,7 @@ const Form = () => {
   };
 
   const submit = () => {
-    validateErrorField(dispatch, "country", formInput.country);
-    if (validateAll(formInput)) {
+    if (validateAll(dispatch, formInput)) {
       console.log("Success");
       dispatch(formSubmit());
     }

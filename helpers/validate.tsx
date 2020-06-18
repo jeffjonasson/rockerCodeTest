@@ -51,11 +51,19 @@ export const validateErrorField = (
   }
 };
 
-export const validateAll = (formInput: FormInput) => {
-  return (
+export const validateAll = (dispatch: Function, formInput: FormInput) => {
+  if (
     validSSN(formInput.ssn) &&
     validPhoneNr(formInput.phoneNr) &&
     validEmail(formInput.email) &&
     validCountry(formInput.country)
-  );
+  )
+    return true;
+  else {
+    dispatch(updateError("ssnError", !validSSN(formInput.ssn)));
+    dispatch(updateError("phoneNrError", !validPhoneNr(formInput.phoneNr)));
+    dispatch(updateError("emailError", !validEmail(formInput.email)));
+    dispatch(updateError("countryError", !validCountry(formInput.country)));
+    return false;
+  }
 };

@@ -1,6 +1,3 @@
-import { purgeStoredState } from "redux-persist";
-import { persistConfig } from "../configureStore";
-
 const UPDATE_INPUT = "UPDATE_INPUT";
 const FORM_SUBMIT = "FORM_SUBMIT";
 
@@ -18,19 +15,15 @@ const initialState = {
   ssn: "",
   phoneNr: "",
   email: "",
-  country: "Select an item...",
+  country: undefined,
 };
 
 export default function formReducer(state = initialState, action: any) {
   switch (action.type) {
     case FORM_SUBMIT:
-      purgeStoredState(persistConfig);
       return initialState;
     case UPDATE_INPUT:
       return { ...state, ...{ [action.name]: action.value } };
-    case FORM_SUBMIT:
-      purgeStoredState(persistConfig);
-      return state;
     default:
       return state;
   }
